@@ -1,0 +1,2 @@
+﻿This project is just a simple way to work with money without needing to resolve floating-point errors.
+No one should expect a very complex project, or should use that without verify if has any potential errors.

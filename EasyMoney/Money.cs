@@ -2,31 +2,15 @@
 
 namespace EasyMoney
 {
-    public class Money
+    public struct Money
     {
-        public Tuple<int, int> Value;
+        public Tuple<int, int> Value = new(0,0);
 
-        public Money(int integer, int cents)
-        {
-            Value = Load(integer, cents);
-        }
+        public Money(int integer, int cents) => Value = Load(integer, cents);
 
-        public Money(double value)
-        {
-            Value = Load(value);
-        }
+        public Money(double value) => Value = Load(value);
 
-        public Money(object? obj)
-        {
-            if (obj == null)
-            Value = Load(Convert.ToInt64(obj));
-        }
-
-        public double ToDouble()
-        {
-            string s = $"{Value.Item1},{Value.Item2}";
-            return double.Parse(s);        
-        }
+        public static implicit operator Money(double value) => new Money(value);
 
         private Tuple<int, int> Load(int integer, int cents)
         {
@@ -38,8 +22,10 @@ namespace EasyMoney
         {
             value = Math.Round(value, 2);
             string[] parts = value.ToString("0.00", CultureInfo.InvariantCulture).Split('.');
-            return new Tuple<int, int>(int.Parse(parts[0]), int.Parse(parts[1]));
+            return Load(int.Parse(parts[0]), int.Parse(parts[1]));
         }
+
+        public double ToDouble() => double.Parse($"{Value.Item1},{Value.Item2}");
 
         public string ToString(string money = "$", char pontuation = '.')
         {

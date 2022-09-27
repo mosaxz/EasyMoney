@@ -14,7 +14,7 @@ namespace EasyMoneyTest
         {
             try
             {
-               Money x = new(integer, cents);
+                Money x = new(integer, cents);
             }
             catch (Exception ex)
             {
@@ -32,7 +32,7 @@ namespace EasyMoneyTest
         [InlineData(9.00)]
         public void ConstructorDoubleIsValid(double value)
         {
-            Money actual = new(value);
+            Money actual = value;
             var x = value.ToString("0.00", CultureInfo.InvariantCulture).Split(".");
             Assert.Equal(int.Parse(x[0]),actual.Value.Item1);
             Assert.Equal(int.Parse(x[1]), actual.Value.Item2);
@@ -47,7 +47,7 @@ namespace EasyMoneyTest
         [InlineData(9.00, 9)]
         public void ToDoubleIsValid(double value, double expected)
         {
-            Money actual = new(value);
+            Money actual = value;
             Assert.Equal(expected, actual.ToDouble());
         }
 
