@@ -1,6 +1,6 @@
 ﻿using EasyMoney;
 
-Money x = 10;
+Money x = 10.0m;
 
 Money y = 10;
 
