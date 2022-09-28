@@ -73,5 +73,34 @@ namespace EasyMoneyTest
             Money actual = new(value);
             Assert.Equal(expected, actual.ToString());
         }
+
+
+
+        [Theory]
+        [InlineData(291.18, 291.18, true)]
+        [InlineData(10.0/3,3.33, true)]
+        [InlineData(141.3912, 141.39, true)]
+        [InlineData(1299.001, 1299, true)]
+        [InlineData(141.399, 141.40, true)]
+        [InlineData(141.399, 141.39, false)]
+        public void EqualityOperatorIsValid(double value, double expected, bool result)
+        {
+            double actual = new Money(value).ToDouble();
+            Assert.True(result == (expected == actual));
+        }
+
+        [Theory]
+        [InlineData(291.18, 291.18, false)]
+        [InlineData(10.0/3, 3.33, false)]
+        [InlineData(141.3912, 141.39, false)]
+        [InlineData(1299.001, 1299, false)]
+        [InlineData(141.399, 141.40, false)]
+        [InlineData(141.399, 141.39, true)]
+        public void InequalityOperatorIsValid(double value, double expected, bool result)
+        {
+            Money actual = new Money(value).ToDouble();
+            Assert.True(result == (expected != actual));
+        }
+
     }
 }

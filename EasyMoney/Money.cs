@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
 namespace EasyMoney
 {
@@ -31,6 +32,10 @@ namespace EasyMoney
         {
             return $"{money} {Value.Item1}{pontuation}{Value.Item2:D2}";
         }
+
+        public static bool operator ==(Money x, Money y) => x.ToDouble() == y.ToDouble();
+
+        public static bool operator !=(Money x, Money y) => !(x.ToDouble() == y.ToDouble());
     }
 }
 
